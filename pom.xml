@@ -1,25 +1,170 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>3.4.2</version>
+  </parent>
 
-  <groupId>org.example</groupId>
+  <groupId>com.daisypig</groupId>
   <artifactId>familyManageSystem</artifactId>
   <version>1.0-SNAPSHOT</version>
-  <packaging>jar</packaging>
+  <packaging>pom</packaging>
 
   <name>familyManageSystem</name>
-  <url>http://maven.apache.org</url>
+  <modules>
+    <module>family-common</module>
+    <module>family-service</module>
+  </modules>
 
   <properties>
+    <java.version>21</java.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    <spring-cloud.version>2024.0.0</spring-cloud.version>
+    <hikari.version>5.1.0</hikari.version>
+    <commons-lang3.version>3.14.0</commons-lang3.version>
+    <orika.core.version>1.5.4</orika.core.version>
+    <jackson.version>2.17.0</jackson.version>
+    <maven-clean-plugin.version>3.3.2</maven-clean-plugin.version>
+    <maven-install-plugin.version>3.1.1</maven-install-plugin.version>
+    <mybatis-generator.version>1.4.3</mybatis-generator.version>
+    <mybatis-plus-spring-boot3-starter-version>3.5.7</mybatis-plus-spring-boot3-starter-version>
+    <jsqlparser-version>3.5.10.1</jsqlparser-version>
+    <sqlserver.version>12.6.1.jre11</sqlserver.version>
+    <consul.version>4.1.1</consul.version>
+    <validation-api.version>3.0.2</validation-api.version>
+    <hibernate-validator.version>8.0.1.Final</hibernate-validator.version>
+    <lombok.version>1.18.36</lombok.version>
+    <aviator.version>1.0.0</aviator.version>
+    <hutool-version>5.8.25</hutool-version>
+    <springdoc.version>2.7.0</springdoc.version>
   </properties>
+  <dependencyManagement>
+    <dependencies>
+      <!-- Spring Cloud Dependencies -->
+      <dependency>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-dependencies</artifactId>
+        <version>${spring-cloud.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-starter-consul-discovery</artifactId>
+        <version>${consul.version}</version>
+      </dependency>
 
-  <dependencies>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>3.8.1</version>
-      <scope>test</scope>
-    </dependency>
-  </dependencies>
+
+      <!-- Third-party Dependencies -->
+<!--      Apache Commons Lang 库的版本 3，提供了许多常用的 Java 工具类，如字符串处理、日期处理等。-->
+      <dependency>
+        <groupId>org.apache.commons</groupId>
+        <artifactId>commons-lang3</artifactId>
+        <version>${commons-lang3.version}</version>
+      </dependency>
+<!--      MyBatis-Plus 与 Spring Boot 3 的集成启动器，简化了 MyBatis 的使用，提供了自动配置和增强的 CRUD 操作。-->
+      <dependency>
+        <groupId>com.baomidou</groupId>
+        <artifactId>mybatis-plus-spring-boot3-starter</artifactId>
+        <version>${mybatis-plus-spring-boot3-starter-version}</version>
+      </dependency>
+<!--      Microsoft SQL Server 的 JDBC 驱动程序，用于连接和操作 SQL Server 数据库。-->
+      <dependency>
+        <groupId>com.microsoft.sqlserver</groupId>
+        <artifactId>mssql-jdbc</artifactId>
+        <version>${sqlserver.version}</version>
+      </dependency>
+<!--      一个高性能的 JDBC 连接池，用于管理数据库连接，提高数据库访问性能。-->
+      <dependency>
+        <groupId>com.zaxxer</groupId>
+        <artifactId>HikariCP</artifactId>
+        <version>${hikari.version}</version>
+      </dependency>
+<!--      Jasypt 与 Spring Boot 的集成启动器，用于对配置文件中的敏感信息（如数据库密码）进行加密和解密。-->
+      <dependency>
+        <groupId>com.github.ulisesbocchio</groupId>
+        <artifactId>jasypt-spring-boot-starter</artifactId>
+        <version>3.0.5</version>
+      </dependency>
+
+      <!--Validation API-->
+      <dependency>
+        <groupId>jakarta.validation</groupId>
+        <artifactId>jakarta.validation-api</artifactId>
+        <version>${validation-api.version}</version>
+      </dependency>
+<!--      Java Bean 验证的 API 规范。-->
+      <dependency>
+        <groupId>org.hibernate.validator</groupId>
+        <artifactId>hibernate-validator</artifactId>
+        <version>${hibernate-validator.version}</version>
+      </dependency>
+
+      <!--Validation API End -->
+<!--      一个 Java 库，通过注解的方式简化 Java 代码的编写，如自动生成 getter、setter、构造函数等。-->
+      <dependency>
+        <groupId>org.projectlombok</groupId>
+        <artifactId>lombok</artifactId>
+        <version>${lombok.version}</version>
+      </dependency>
+<!--      Springdoc 提供的 OpenAPI 集成启动器，用于自动生成和展示 Swagger UI 文档，方便测试和调试 RESTful API。-->
+      <dependency>
+        <groupId>org.springdoc</groupId>
+        <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+        <version>${springdoc.version}</version>
+      </dependency>
+      <!-- starter-actuator -->
+<!--      Spring Boot 的 Actuator 模块，提供了生产级别的监控和管理功能，如健康检查、指标监控、环境信息等。-->
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-actuator</artifactId>
+        <version>3.4.2</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+  <build>
+    <pluginManagement>
+<!--      用于将项目的构建产物（如 JAR 文件）安装到本地 Maven 仓库中。-->
+      <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-install-plugin</artifactId>
+          <version>${maven-install-plugin.version}</version>
+        </plugin>
+<!--        用于编译 Java 源代码，指定编译的 Java 版本和编码等参数。-->
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>3.12.1</version>
+        </plugin>
+<!--        用于运行项目中的单元测试。-->
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-surefire-plugin</artifactId>
+          <version>3.2.5</version>
+        </plugin>
+<!--        用于将项目打包成 JAR 文件。-->
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-jar-plugin</artifactId>
+          <version>3.3.0</version>
+        </plugin>
+<!--        MyBatis 代码生成器的 Maven 插件，根据配置文件（generatorConfig.xml）自动生成 MyBatis 的实体类、Mapper 接口和 XML 文件。-->
+        <plugin>
+          <groupId>org.mybatis.generator</groupId>
+          <artifactId>mybatis-generator-maven-plugin</artifactId>
+          <version>${mybatis-generator.version}</version>
+          <configuration>
+            <configurationFile>${basedir}/src/main/resources/generatorConfig.xml</configurationFile>
+            <overwrite>true</overwrite>
+            <verbose>true</verbose>
+          </configuration>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
 </project>

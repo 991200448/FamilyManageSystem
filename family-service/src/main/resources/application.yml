@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: family-service
+  profiles:
+    active: dev
+### actuator
+management:
+  health:
+    mail:
+      enabled: false
+  server:
+    base-path: /actuator

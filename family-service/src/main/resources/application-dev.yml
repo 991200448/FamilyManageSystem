@@ -1,0 +1,62 @@
+server:
+  port: 9081
+  servlet:
+    context-path: /familyManageSystem/api
+jasypt:
+  encryptor:
+    password: dsb-aps-secret
+    algorithm: PBEWithMD5AndDES
+    iv-generator-classname: org.jasypt.iv.NoIvGenerator
+    key-obtention-iterations: 1000
+    pool-size: 1
+    salt-generator-classname: org.jasypt.salt.RandomSaltGenerator
+    string-output-type: base64
+
+spring:
+  datasource:
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+    url: jdbc:sqlserver://127.0.0.1:1433;DatabaseName=XXX;encrypt=false;trustServerCertificate=true;
+    username: XXX
+    #java -cp E:\apache-maven-3.9.9\repository\org\jasypt\jasypt\1.9.3\jasypt-1.9.3.jar org.jasypt.intf.cli.JasyptPBEStringEncryptionCLI input="Clps_2025!" password="dsb-aps-secret" algorithm="PBEWithMD5AndDES"
+    password: XXX
+    hikari:
+      pool-name: datasource-pool
+      connectionTimeout: 60000
+      idleTimeout: 900000
+      maximumPoolSize: 15
+      minimum-idle: 5
+  cloud:
+    consul:
+      host: localhost
+      port: 8500
+      discovery:
+        enabled: true
+        instance-id: ${spring.application.name}
+        service-name: ${spring.application.name}
+        port: ${server.port}
+        prefer-ip-address: true
+        ip-address: ${spring.cloud.client.ip-address}
+        register: true
+        deregister: true
+        health-check-interval: 10s
+        health-check-critical-timeout: 5s
+        heartbeat:
+          enabled: true
+
+
+mybatis-plus:
+  mapper-locations: classpath*:/mapper/*Mapper.xml  # 可以不配置
+  type-aliases-package: com.dsb.aps.web.repository.entity
+  configuration:
+    map-underscore-to-camel-case: true
+  global-config:
+    banner: false
+logging:
+  config: classpath:logback-spring.xml
+  level:
+    root: info
+    # 临时开启 DEBUG 日志
+    com.baomidou.mybatisplus: OFF
+    org.springframework.boot.autoconfigure: ERROR
+  file:
+    path: /var/jenkins_home/workspace/log
