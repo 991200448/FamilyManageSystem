@@ -14,11 +14,10 @@ jasypt:
 
 spring:
   datasource:
-    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
-    url: jdbc:sqlserver://127.0.0.1:1433;DatabaseName=XXX;encrypt=false;trustServerCertificate=true;
-    username: XXX
-    #java -cp E:\apache-maven-3.9.9\repository\org\jasypt\jasypt\1.9.3\jasypt-1.9.3.jar org.jasypt.intf.cli.JasyptPBEStringEncryptionCLI input="Clps_2025!" password="dsb-aps-secret" algorithm="PBEWithMD5AndDES"
-    password: XXX
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/FMSDB?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+    username: daisypig
+    password: ENC(JioH0Z/DV9vJo6BAM4hyfO9ksqCwOVvv)
     hikari:
       pool-name: datasource-pool
       connectionTimeout: 60000

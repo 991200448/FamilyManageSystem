@@ -32,7 +32,7 @@
     <mybatis-generator.version>1.4.3</mybatis-generator.version>
     <mybatis-plus-spring-boot3-starter-version>3.5.7</mybatis-plus-spring-boot3-starter-version>
     <jsqlparser-version>3.5.10.1</jsqlparser-version>
-    <sqlserver.version>12.6.1.jre11</sqlserver.version>
+    <mysql-version>8.2.0</mysql-version>
     <consul.version>4.1.1</consul.version>
     <validation-api.version>3.0.2</validation-api.version>
     <hibernate-validator.version>8.0.1.Final</hibernate-validator.version>
@@ -71,11 +71,11 @@
         <artifactId>mybatis-plus-spring-boot3-starter</artifactId>
         <version>${mybatis-plus-spring-boot3-starter-version}</version>
       </dependency>
-<!--      Microsoft SQL Server 的 JDBC 驱动程序，用于连接和操作 SQL Server 数据库。-->
+<!--      数据库。-->
       <dependency>
-        <groupId>com.microsoft.sqlserver</groupId>
-        <artifactId>mssql-jdbc</artifactId>
-        <version>${sqlserver.version}</version>
+        <groupId>com.mysql</groupId>
+        <artifactId>mysql-connector-j</artifactId>
+        <version>${mysql-version}</version> <!-- 根据实际情况选择合适的版本 -->
       </dependency>
 <!--      一个高性能的 JDBC 连接池，用于管理数据库连接，提高数据库访问性能。-->
       <dependency>
