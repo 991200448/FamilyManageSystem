@@ -8,8 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * 启动主入口.
  * @author : chenwu
  */
-@SpringBootApplication(scanBasePackages = {"com.daisypig"})
-@MapperScan("com.daisypig.repository.mapper")
+@SpringBootApplication(scanBasePackages = {"com.daisypig", "com.daisypig.auth", "com.daisypig.common"})
 public class ApplicationStarter {
 
     public static void main(String[] args) {

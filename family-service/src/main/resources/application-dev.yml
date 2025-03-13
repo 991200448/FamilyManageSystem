@@ -4,7 +4,7 @@ server:
     context-path: /familyManageSystem/api
 jasypt:
   encryptor:
-    password: dsb-aps-secret
+    password: familyManage-secret
     algorithm: PBEWithMD5AndDES
     iv-generator-classname: org.jasypt.iv.NoIvGenerator
     key-obtention-iterations: 1000
@@ -17,7 +17,7 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://127.0.0.1:3306/FMSDB?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
     username: daisypig
-    password: ENC(JioH0Z/DV9vJo6BAM4hyfO9ksqCwOVvv)
+    password: gipysiad
     hikari:
       pool-name: datasource-pool
       connectionTimeout: 60000
@@ -45,7 +45,7 @@ spring:
 
 mybatis-plus:
   mapper-locations: classpath*:/mapper/*Mapper.xml  # 可以不配置
-  type-aliases-package: com.dsb.aps.web.repository.entity
+  type-aliases-package: com.daisypig.common.entity
   configuration:
     map-underscore-to-camel-case: true
   global-config:
